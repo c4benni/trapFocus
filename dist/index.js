@@ -186,6 +186,9 @@ class UiTrapFocus {
         this.steps = steps;
     }
     controlledFocus(evt) {
+        if (isHTML(evt.currentTarget)) {
+            throw new Error("Invalid event object");
+        }
         return new ControlledFocus({
             root: evt.currentTarget,
             children: this.children,

@@ -191,6 +191,10 @@ export default class UiTrapFocus {
   private _name = "**UiTrapFocus";
 
   controlledFocus(evt: KeyboardEvent) {
+    if (isHTML(evt.currentTarget)) {
+      throw new Error("Invalid event object");
+    }
+
     return new ControlledFocus({
       root: evt.currentTarget as HTMLElement,
       children: this.children,
