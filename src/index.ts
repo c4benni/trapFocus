@@ -145,6 +145,7 @@ function error() {
   throw new Error("UiTrapFocus not setup properly");
 }
 
+const name = "**UiTrapFocus**";
 export default class UiTrapFocus {
   isForward: MoveFocus;
   isBackward: MoveFocus;
@@ -188,10 +189,10 @@ export default class UiTrapFocus {
     this.steps = steps;
   }
 
-  private _name = "**UiTrapFocus";
+  private _name = name;
 
   controlledFocus(evt: KeyboardEvent) {
-    if (isHTML(evt.currentTarget)) {
+    if (!isHTML(evt.currentTarget)) {
       throw new Error("Invalid event object");
     }
 
@@ -213,7 +214,7 @@ export default class UiTrapFocus {
   }
 
   get sameInstance() {
-    return this._name === "**UiTrapFocus";
+    return this._name === name;
   }
 
   init(evt: KeyboardEvent) {

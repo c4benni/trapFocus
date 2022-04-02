@@ -124,6 +124,7 @@ class ControlledFocus {
 function error() {
     throw new Error("UiTrapFocus not setup properly");
 }
+const name = "**UiTrapFocus**";
 class UiTrapFocus {
     constructor(arg = {}) {
         Object.defineProperty(this, "isForward", {
@@ -172,7 +173,7 @@ class UiTrapFocus {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: "**UiTrapFocus"
+            value: name
         });
         const isTab = (e) => (!e.ctrlKey && !e.metaKey && !e.altKey && /^tab$/i.test(e.code)) ||
             e.keyCode === 9;
@@ -186,7 +187,7 @@ class UiTrapFocus {
         this.steps = steps;
     }
     controlledFocus(evt) {
-        if (isHTML(evt.currentTarget)) {
+        if (!isHTML(evt.currentTarget)) {
             throw new Error("Invalid event object");
         }
         return new ControlledFocus({
@@ -204,7 +205,7 @@ class UiTrapFocus {
         };
     }
     get sameInstance() {
-        return this._name === "**UiTrapFocus";
+        return this._name === name;
     }
     init(evt) {
         if (!this.sameInstance) {
