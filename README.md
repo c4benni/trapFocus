@@ -30,7 +30,6 @@ default behavior (use tab to move a step forward, shift + tab to move a step bac
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from "vue";
 import TrapFocus from "ui-trap-focus";
 
 const trapFocus = (evt: KeyboardEvent) => new TrapFocus().init(evt);
@@ -51,7 +50,6 @@ custom behavior (use arrow down to move a step forward, arrow up to move a step 
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from "vue";
 import TrapFocus from "ui-trap-focus";
 
 const trapFocus = (evt: KeyboardEvent) =>
@@ -78,7 +76,6 @@ custom behavior (trap focus moving forward only)
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from "vue";
 import TrapFocus from "ui-trap-focus";
 
 // forward and backward option not neccessary
@@ -101,7 +98,6 @@ custom behavior (trap focus moving backward only)
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from "vue";
 import TrapFocus from "ui-trap-focus";
 
 // forward and backward option not neccessary
@@ -124,7 +120,6 @@ custom behavior (trap specific children)
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from "vue";
 import TrapFocus from "ui-trap-focus";
 
 const trapFocus = (evt: KeyboardEvent) =>
@@ -150,7 +145,6 @@ custom behavior (use closest match. Usefull when you want to trap specific child
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from "vue";
 import TrapFocus from "ui-trap-focus";
 
 const trapFocus = (evt: KeyboardEvent) =>
@@ -174,7 +168,6 @@ custom behavior (disable loop)</strong>
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from "vue";
 import TrapFocus from "ui-trap-focus";
 
 const trapFocus = (evt: KeyboardEvent) =>
@@ -198,7 +191,6 @@ custom behavior (prevent scroll)</strong>
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from "vue";
 import TrapFocus from "ui-trap-focus";
 
 const trapFocus = (evt: KeyboardEvent) =>
@@ -229,7 +221,6 @@ custom behavior (move 2 steps forward, and 3 steps backward)</strong>
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from "vue";
 import TrapFocus from "ui-trap-focus";
 
 const trapFocus = (evt: KeyboardEvent) =>
