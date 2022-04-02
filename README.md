@@ -39,7 +39,7 @@ const trapFocus = (evt: KeyboardEvent) => new TrapFocus().init(evt);
 
 </details>
 
-<details open>
+<details>
 <summary>
 <strong>
 custom behavior (use arrow down to move a step forward, arrow up to move a step back)</strong>
