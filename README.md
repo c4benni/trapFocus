@@ -14,7 +14,7 @@ UiTrapFocus will attempt to trap focus on any focusable element by default in th
 
 ## Usage
 
-> a proper keyboard event only with e.target should be used to trap focus.
+> A proper keyboard event only with `e.currentTarget` should be used to trap focus.
 
 **_Vue project_**
 
