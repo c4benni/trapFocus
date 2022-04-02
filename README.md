@@ -14,10 +14,10 @@ npm i ui-trap-focus
 
 ```vue
 <Template>
-// a proper keyboard event only with e.target should be used to trap focus.
-// dont forget to prevent default on keydown event!!!
+<!--  a proper keyboard event only with e.target should be used to trap focus. -->
+<!-- dont forget to prevent default on keydown event!!! -->
 
-// default behavior (use tab to move a step forward, shift + tab to move a step back)
+<!-- default behavior (use tab to move a step forward, shift + tab to move a step back) -->
 <div
     @keydown.prevent
     @keyup="trapFocus"
@@ -25,7 +25,7 @@ npm i ui-trap-focus
     ...
 </div>
 
-// custom behavior (use arrow down to move a step forward, arrow up to move a step back)
+<!-- custom behavior (use arrow down to move a step forward, arrow up to move a step back) -->
 <div
     @keydown.prevent
     @keyup="trapFocusWithArrow"
@@ -33,7 +33,7 @@ npm i ui-trap-focus
     ...
 </div>
 
-// custom behavior (move 2 steps forward, and 3 steps backward)
+<!-- custom behavior (move 2 steps forward, and 3 steps backward) -->
 <div
     @keydown.prevent
     @keyup="trapFocusWithSteps"
@@ -41,7 +41,7 @@ npm i ui-trap-focus
     ...
 </div>
 
-// custom behavior (trap specific children)
+<!-- custom behavior (trap specific children) -->
 <div
     @keydown.prevent
     @keyup="trapFocusForAllButtons"
@@ -50,7 +50,7 @@ npm i ui-trap-focus
 </div>
 </template>
 
-// custom behavior (disable loop)
+<!-- custom behavior (disable loop) -->
 <div
     @keydown.prevent
     @keyup="trapFocusWithoutLoop"
@@ -58,7 +58,7 @@ npm i ui-trap-focus
     ...
 </div>
 
-// custom behavior (prevent scroll)
+<!-- custom behavior (prevent scroll) -->
 <div
     @keydown.prevent
     @keyup="trapFocusWithoutScrolling"
