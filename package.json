@@ -1,23 +1,45 @@
 {
     "name": "ui-trap-focus",
-    "version": "0.0.1",
-    "description": "",
+    "version": "0.0.22",
+    "description": "Trap focus for web based projects.",
     "main": "index.js",
+    "files": [
+        "dist"
+    ],
+    "types": "./dist",
+    "module": "./dist/index.js",
+    "unpkg": "./dist/index.min.js",
+    "jsdelivr": "./dist/index.min.js",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "require": "./dist/index.min.js"
+        }
+    },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "build": "tsc -p tsconfig.json"
     },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/c4benni/trapFocus.git"
     },
-    "keywords": [],
-    "author": "",
+    "keywords": [
+        "trap focus",
+        "dialog",
+        "focus trap",
+        "ui",
+        "ui trap focus"
+    ],
+    "author": "Chidi Benedict",
     "license": "ISC",
     "bugs": {
         "url": "https://github.com/c4benni/trapFocus/issues"
     },
     "homepage": "https://github.com/c4benni/trapFocus#readme",
     "devDependencies": {
-        "jest": "^27.5.1"
+        "@babel/core": "^7.17.8",
+        "@babel/preset-env": "^7.16.11",
+        "@babel/preset-typescript": "^7.16.7",
+        "typescript": "^4.6.3"
     }
 }
