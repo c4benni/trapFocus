@@ -75,24 +75,29 @@ export default defineComponent({
     ...
     data: () => ({
         trapFocus: new TrapFocus(),
+
         trapFocusWithArrow: new TrapFocus({
             // customize what key controls the forward and backwards tabbing
             forward: (evt) => e.keyCode === 40,
             backward: (evt) => e.keyCode === 38
         }),
+
         trapFocusWithSteps: new TrapFocus({
             steps: {
                 forward: 2,
                 backward: 3
             }
         }),
+
         trapFocusForAllButtons: new TrapFocus({
             // valid querySelector within the element listening for focus traps
             children: 'button'
         }),
+
         trapFocusWithoutLoop: new TrapFocus({
             loop: false
         }),
+
         trapFocusWithoutScrolling: new TrapFocus({
             // object syntax, if you need to be more specific
             // preventScroll: {
