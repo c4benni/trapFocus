@@ -18,7 +18,11 @@ UiTrapFocus will attempt to trap focus on any focusable element by default in th
 
 **_Vue project_**
 
-##### default behavior (use tab to move a step forward, shift + tab to move a step back)
+<details open>
+<summary>
+<strong>
+default behavior (use tab to move a step forward, shift + tab to move a step back)</strong>
+</summary>
 
 ```vue
 <template>
@@ -33,7 +37,13 @@ const trapFocus = (evt: KeyboardEvent) => new TrapFocus().init(evt);
 </script>
 ```
 
-##### custom behavior (use arrow down to move a step forward, arrow up to move a step back)
+</details>
+
+<details open>
+<summary>
+<strong>
+custom behavior (use arrow down to move a step forward, arrow up to move a step back)</strong>
+</summary>
 
 ```vue
 <template>
@@ -52,6 +62,8 @@ const trapFocus = (evt: KeyboardEvent) =>
   }).init(evt);
 </script>
 ```
+
+</details>
 
 <details>
 <summary>
