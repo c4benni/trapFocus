@@ -14,57 +14,57 @@ npm i ui-trap-focus
 
 ```vue
 <Template>
-<!--  a proper keyboard event only with e.target should be used to trap focus. -->
-<!-- dont forget to prevent default on keydown event!!! -->
+    <!--  a proper keyboard event only with e.target should be used to trap focus. -->
+    <!-- dont forget to prevent default on keydown event!!! -->
 
-<!-- default behavior (use tab to move a step forward, shift + tab to move a step back) -->
-<div
-    @keydown.prevent
-    @keyup="trapFocus"
->
-    ...
-</div>
+    <!-- default behavior (use tab to move a step forward, shift + tab to move a step back) -->
+    <div
+        @keydown.prevent
+        @keyup="trapFocus"
+    >
+        ...
+    </div>
 
-<!-- custom behavior (use arrow down to move a step forward, arrow up to move a step back) -->
-<div
-    @keydown.prevent
-    @keyup="trapFocusWithArrow"
->
-    ...
-</div>
+    <!-- custom behavior (use arrow down to move a step forward, arrow up to move a step back) -->
+    <div
+        @keydown.prevent
+        @keyup="trapFocusWithArrow"
+    >
+        ...
+    </div>
 
-<!-- custom behavior (move 2 steps forward, and 3 steps backward) -->
-<div
-    @keydown.prevent
-    @keyup="trapFocusWithSteps"
->
-    ...
-</div>
+    <!-- custom behavior (move 2 steps forward, and 3 steps backward) -->
+    <div
+        @keydown.prevent
+        @keyup="trapFocusWithSteps"
+    >
+        ...
+    </div>
 
-<!-- custom behavior (trap specific children) -->
-<div
-    @keydown.prevent
-    @keyup="trapFocusForAllButtons"
->
-    ...
-</div>
-</template>
+    <!-- custom behavior (trap specific children) -->
+    <div
+        @keydown.prevent
+        @keyup="trapFocusForAllButtons"
+    >
+        ...
+    </div>
+    </template>
 
-<!-- custom behavior (disable loop) -->
-<div
-    @keydown.prevent
-    @keyup="trapFocusWithoutLoop"
->
-    ...
-</div>
+    <!-- custom behavior (disable loop) -->
+    <div
+        @keydown.prevent
+        @keyup="trapFocusWithoutLoop"
+    >
+        ...
+    </div>
 
-<!-- custom behavior (prevent scroll) -->
-<div
-    @keydown.prevent
-    @keyup="trapFocusWithoutScrolling"
->
-    ...
-</div>
+    <!-- custom behavior (prevent scroll) -->
+    <div
+        @keydown.prevent
+        @keyup="trapFocusWithoutScrolling"
+    >
+        ...
+    </div>
 </template>
 
 <script lang='ts'>
