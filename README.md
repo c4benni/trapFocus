@@ -68,10 +68,10 @@ npm i ui-trap-focus
 </template>
 
 <script lang='ts'>
-import Vue from 'vue'
+import { defineComponent } from 'vue'
 import TrapFocus from 'ui-trap-focus'
 
-export default Vue.extends({
+export default defineComponent({
     ...
     data: () => ({
         trapFocus: new TrapFocus(),
