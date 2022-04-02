@@ -14,38 +14,15 @@ UiTrapFocus will attempt to trap focus on any focusable element by default in th
 
 ## Usage
 
+> a proper keyboard event only with e.target should be used to trap focus.
+
 **_Vue project_**
+
+##### default behavior (use tab to move a step forward, shift + tab to move a step back)
 
 ```vue
 <template>
-  <!--  a proper keyboard event only with e.target should be used to trap focus. -->
-
-  <!-- default behavior (use tab to move a step forward, shift + tab to move a step back) -->
   <div @keydown="trapFocus">...</div>
-
-  <!-- custom behavior (use arrow down to move a step forward, arrow up to move a step back) -->
-  <div @keydown="trapFocusWithArrow">...</div>
-
-  <!-- custom behavior (trap focus moving forward only) -->
-  <div @keydown="trapFocusOnForward">...</div>
-
-  <!-- custom behavior (trap focus moving backward only) -->
-  <div @keydown="trapFocusOnBackward">...</div>
-
-  <!-- custom behavior (trap specific children) -->
-  <div @keydown="trapFocusForAllButtons">...</div>
-
-  <!-- custom behavior (use closest match. Usefull when you want to trap specific children only) -->
-  <div @keydown="trapFocusOnClosest">...</div>
-
-  <!-- custom behavior (disable loop) -->
-  <div @keydown="trapFocusWithoutLoop">...</div>
-
-  <!-- custom behavior (prevent scroll) -->
-  <div @keydown="trapFocusWithoutScrolling">...</div>
-
-  <!-- custom behavior (move 2 steps forward, and 3 steps backward) -->
-  <div @keydown="trapFocusWithSteps">...</div>
 </template>
 
 <script lang="ts" setup>
@@ -53,38 +30,166 @@ import { defineComponent } from "vue";
 import TrapFocus from "ui-trap-focus";
 
 const trapFocus = (evt: KeyboardEvent) => new TrapFocus().init(evt);
+</script>
+```
 
-const trapFocusWithArrow = (evt: KeyboardEvent) =>
+##### custom behavior (use arrow down to move a step forward, arrow up to move a step back)
+
+```vue
+<template>
+  <div @keydown="trapFocus">...</div>
+</template>
+
+<script lang="ts" setup>
+import { defineComponent } from "vue";
+import TrapFocus from "ui-trap-focus";
+
+const trapFocus = (evt: KeyboardEvent) =>
   new TrapFocus({
     // customize what key controls the forward and backwards tabbing
     forward: (evt) => e.keyCode === 40,
     backward: (evt) => e.keyCode === 38,
   }).init(evt);
+</script>
+```
+
+<details>
+<summary>
+<strong>
+custom behavior (trap focus moving forward only)
+</strong>
+</summary>
+
+```vue
+<template>
+  <div @keydown="trapFocus">...</div>
+</template>
+
+<script lang="ts" setup>
+import { defineComponent } from "vue";
+import TrapFocus from "ui-trap-focus";
 
 // forward and backward option not neccessary
-const trapFocusOnForward = (evt: KeyboardEvent) => new TrapFocus().forward(evt);
+const trapFocus = (evt: KeyboardEvent) => new TrapFocus().forward(evt);
+</script>
+```
+
+</details>
+
+<details>
+<summary>
+<strong>
+custom behavior (trap focus moving backward only)
+</strong>
+</summary>
+
+```vue
+<template>
+  <div @keydown="trapFocus">...</div>
+</template>
+
+<script lang="ts" setup>
+import { defineComponent } from "vue";
+import TrapFocus from "ui-trap-focus";
 
 // forward and backward option not neccessary
-const trapFocusOnBackward = (evt: KeyboardEvent) =>
-  new TrapFocus().backward(evt);
+const trapFocus = (evt: KeyboardEvent) => new TrapFocus().backward(evt);
+</script>
+```
 
-const trapFocusForAllButtons = (evt: KeyboardEvent) =>
+</details>
+
+<details>
+<summary>
+<strong>
+custom behavior (trap specific children)
+</strong>
+</summary>
+
+```vue
+<template>
+  <div @keydown="trapFocus">...</div>
+</template>
+
+<script lang="ts" setup>
+import { defineComponent } from "vue";
+import TrapFocus from "ui-trap-focus";
+
+const trapFocus = (evt: KeyboardEvent) =>
   new TrapFocus({
     // valid querySelector within the element listening for focus traps
     children: "button",
   }).init(evt);
+</script>
+```
 
-const trapFocusOnClosest = (evt: KeyboardEvent) =>
+</details>
+
+<details>
+<summary>
+<strong>
+custom behavior (use closest match. Usefull when you want to trap specific children only)
+</strong>
+</summary>
+
+```vue
+<template>
+  <div @keydown="trapFocus">...</div>
+</template>
+
+<script lang="ts" setup>
+import { defineComponent } from "vue";
+import TrapFocus from "ui-trap-focus";
+
+const trapFocus = (evt: KeyboardEvent) =>
   new TrapFocus({
     closest: "div",
   }).init(evt);
+</script>
+```
 
-const trapFocusWithoutLoop = (evt: KeyboardEvent) =>
+</details>
+
+<details>
+<summary>
+<strong>
+custom behavior (disable loop)</strong>
+</summary>
+
+```vue
+<template>
+  <div @keydown="trapFocus">...</div>
+</template>
+
+<script lang="ts" setup>
+import { defineComponent } from "vue";
+import TrapFocus from "ui-trap-focus";
+
+const trapFocus = (evt: KeyboardEvent) =>
   new TrapFocus({
     loop: false,
   }).init(evt);
+</script>
+```
 
-const trapFocusWithoutScrolling = (evt: KeyboardEvent) =>
+</details>
+
+<details>
+<summary>
+<strong>
+custom behavior (prevent scroll)</strong>
+</summary>
+
+```vue
+<template>
+  <div @keydown="trapFocus">...</div>
+</template>
+
+<script lang="ts" setup>
+import { defineComponent } from "vue";
+import TrapFocus from "ui-trap-focus";
+
+const trapFocus = (evt: KeyboardEvent) =>
   new TrapFocus({
     // object syntax, if you need to be more specific
     // preventScroll: {
@@ -95,8 +200,27 @@ const trapFocusWithoutScrolling = (evt: KeyboardEvent) =>
     // boolean syntax
     preventScroll: true,
   }).init(evt);
+</script>
+```
 
-const trapFocusWithSteps = (evt: KeyboardEvent) =>
+</details>
+
+<details>
+<summary>
+<strong>
+custom behavior (move 2 steps forward, and 3 steps backward)</strong>
+</summary>
+
+```vue
+<template>
+  <div @keydown="trapFocus">...</div>
+</template>
+
+<script lang="ts" setup>
+import { defineComponent } from "vue";
+import TrapFocus from "ui-trap-focus";
+
+const trapFocus = (evt: KeyboardEvent) =>
   new TrapFocus({
     // object, more robust syntax
     // steps: {
@@ -109,6 +233,8 @@ const trapFocusWithSteps = (evt: KeyboardEvent) =>
   }).init(evt);
 </script>
 ```
+
+</details>
 
 Thats basically all the possible functionalities.
 
