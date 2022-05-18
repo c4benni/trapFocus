@@ -79,16 +79,32 @@ class ControlledFocus {
     }
   }
 
-  // move forward and destroy
-  forward(count = 0) {
-    if (!this.focusableNodes || !this.focusableNodes.length) {
-      return;
-    }
+  focus(index: number): Promise<HTMLElement | null> {
+    return new Promise((resolve) => {
+      if (!this.focusableNodes || !this.focusableNodes.length) {
+        return resolve(null);
+      }
 
-    const preventScroll =
-      typeof this.preventScroll === "object"
-        ? this.preventScroll.forward
-        : this.preventScroll;
+      const preventScroll =
+        typeof this.preventScroll === "object"
+          ? this.preventScroll.backward
+          : this.preventScroll;
+
+      const focusOn = this.focusableNodes[index];
+
+      focusOn.focus({ preventScroll });
+
+      this.destroy();
+
+      resolve(focusOn);
+    });
+  }
+
+  // move forward and destroy
+  async forward(count = 0): Promise<HTMLElement | null> {
+    if (!this.focusableNodes || !this.focusableNodes.length) {
+      return null;
+    }
 
     const getIndex =
       this.index + 1 + count > this.focusableNodes.length - 1
@@ -97,21 +113,14 @@ class ControlledFocus {
           : this.focusableNodes.length - 1
         : this.index + 1 + count;
 
-    this.focusableNodes[getIndex].focus({ preventScroll });
-
-    this.destroy();
+    return await this.focus(getIndex);
   }
 
   // move backward and destroy
-  backward(count = 0) {
+  async backward(count = 0): Promise<HTMLElement | null> {
     if (!this.focusableNodes || !this.focusableNodes.length) {
-      return;
+      return null;
     }
-
-    const preventScroll =
-      typeof this.preventScroll === "object"
-        ? this.preventScroll.backward
-        : this.preventScroll;
 
     const getIndex =
       this.index - 1 - count < 0
@@ -120,9 +129,7 @@ class ControlledFocus {
           : 0
         : this.index - 1 - count;
 
-    this.focusableNodes[getIndex].focus({ preventScroll });
-
-    this.destroy();
+    return await this.focus(getIndex);
   }
 
   // clear nodes to avoid memory leaks
@@ -142,7 +149,7 @@ type Steps =
     };
 
 function error() {
-  throw new Error("UiTrapFocus not setup properly");
+  console.error("UiTrapFocus not setup properly");
 }
 
 const name = "**UiTrapFocus**";
@@ -219,7 +226,9 @@ export default class UiTrapFocus {
 
   init(evt: KeyboardEvent) {
     if (!this.sameInstance) {
-      return error();
+      error();
+
+      return Promise.resolve(null);
     }
 
     const trapFocus = this.controlledFocus(evt);
@@ -231,31 +240,37 @@ export default class UiTrapFocus {
 
     if (this.isBackward(evt)) {
       evt.preventDefault();
-      trapFocus.backward(this.step.backward);
+      return trapFocus.backward(this.step.backward);
     }
+
+    return Promise.resolve(null);
   }
 
   forward(evt: KeyboardEvent) {
     if (!this.sameInstance) {
-      return error();
+      error();
+
+      return Promise.resolve(null);
     }
 
     evt.preventDefault();
 
     const trapFocus = this.controlledFocus(evt);
 
-    trapFocus.forward(this.step.forward);
+    return trapFocus.forward(this.step.forward);
   }
 
   backward(evt: KeyboardEvent) {
     if (!this.sameInstance) {
-      return error();
+      error();
+
+      return Promise.resolve(null);
     }
 
     evt.preventDefault();
 
     const trapFocus = this.controlledFocus(evt);
 
-    trapFocus.backward(this.step.backward);
+    return trapFocus.backward(this.step.backward);
   }
 }

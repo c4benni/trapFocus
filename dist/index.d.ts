@@ -16,8 +16,9 @@ declare class ControlledFocus {
         preventScroll?: PreventScroll;
         closest?: string;
     });
-    forward(count?: number): void;
-    backward(count?: number): void;
+    focus(index: number): Promise<HTMLElement | null>;
+    forward(count?: number): Promise<HTMLElement | null>;
+    backward(count?: number): Promise<HTMLElement | null>;
     destroy(): void;
 }
 declare type MoveFocus = (evt: KeyboardEvent) => boolean;
@@ -46,8 +47,8 @@ export default class UiTrapFocus {
     controlledFocus(evt: KeyboardEvent): ControlledFocus;
     private get step();
     get sameInstance(): boolean;
-    init(evt: KeyboardEvent): void;
-    forward(evt: KeyboardEvent): void;
-    backward(evt: KeyboardEvent): void;
+    init(evt: KeyboardEvent): Promise<HTMLElement | null>;
+    forward(evt: KeyboardEvent): Promise<HTMLElement | null>;
+    backward(evt: KeyboardEvent): Promise<HTMLElement | null>;
 }
 export {};

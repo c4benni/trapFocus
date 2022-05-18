@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const isHTML = (arg) => arg instanceof HTMLElement;
 class ControlledFocus {
@@ -83,37 +92,47 @@ class ControlledFocus {
             }
         }
     }
+    focus(index) {
+        return new Promise((resolve) => {
+            if (!this.focusableNodes || !this.focusableNodes.length) {
+                return resolve(null);
+            }
+            const preventScroll = typeof this.preventScroll === "object"
+                ? this.preventScroll.backward
+                : this.preventScroll;
+            const focusOn = this.focusableNodes[index];
+            focusOn.focus({ preventScroll });
+            this.destroy();
+            resolve(focusOn);
+        });
+    }
     // move forward and destroy
     forward(count = 0) {
-        if (!this.focusableNodes || !this.focusableNodes.length) {
-            return;
-        }
-        const preventScroll = typeof this.preventScroll === "object"
-            ? this.preventScroll.forward
-            : this.preventScroll;
-        const getIndex = this.index + 1 + count > this.focusableNodes.length - 1
-            ? this.loop
-                ? 0
-                : this.focusableNodes.length - 1
-            : this.index + 1 + count;
-        this.focusableNodes[getIndex].focus({ preventScroll });
-        this.destroy();
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!this.focusableNodes || !this.focusableNodes.length) {
+                return null;
+            }
+            const getIndex = this.index + 1 + count > this.focusableNodes.length - 1
+                ? this.loop
+                    ? 0
+                    : this.focusableNodes.length - 1
+                : this.index + 1 + count;
+            return yield this.focus(getIndex);
+        });
     }
     // move backward and destroy
     backward(count = 0) {
-        if (!this.focusableNodes || !this.focusableNodes.length) {
-            return;
-        }
-        const preventScroll = typeof this.preventScroll === "object"
-            ? this.preventScroll.backward
-            : this.preventScroll;
-        const getIndex = this.index - 1 - count < 0
-            ? this.loop
-                ? this.focusableNodes.length - 1
-                : 0
-            : this.index - 1 - count;
-        this.focusableNodes[getIndex].focus({ preventScroll });
-        this.destroy();
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!this.focusableNodes || !this.focusableNodes.length) {
+                return null;
+            }
+            const getIndex = this.index - 1 - count < 0
+                ? this.loop
+                    ? this.focusableNodes.length - 1
+                    : 0
+                : this.index - 1 - count;
+            return yield this.focus(getIndex);
+        });
     }
     // clear nodes to avoid memory leaks
     destroy() {
@@ -122,7 +141,7 @@ class ControlledFocus {
     }
 }
 function error() {
-    throw new Error("UiTrapFocus not setup properly");
+    console.error("UiTrapFocus not setup properly");
 }
 const name = "**UiTrapFocus**";
 class UiTrapFocus {
@@ -209,7 +228,8 @@ class UiTrapFocus {
     }
     init(evt) {
         if (!this.sameInstance) {
-            return error();
+            error();
+            return Promise.resolve(null);
         }
         const trapFocus = this.controlledFocus(evt);
         if (this.isForward(evt)) {
@@ -218,24 +238,27 @@ class UiTrapFocus {
         }
         if (this.isBackward(evt)) {
             evt.preventDefault();
-            trapFocus.backward(this.step.backward);
+            return trapFocus.backward(this.step.backward);
         }
+        return Promise.resolve(null);
     }
     forward(evt) {
         if (!this.sameInstance) {
-            return error();
+            error();
+            return Promise.resolve(null);
         }
         evt.preventDefault();
         const trapFocus = this.controlledFocus(evt);
-        trapFocus.forward(this.step.forward);
+        return trapFocus.forward(this.step.forward);
     }
     backward(evt) {
         if (!this.sameInstance) {
-            return error();
+            error();
+            return Promise.resolve(null);
         }
         evt.preventDefault();
         const trapFocus = this.controlledFocus(evt);
-        trapFocus.backward(this.step.backward);
+        return trapFocus.backward(this.step.backward);
     }
 }
 exports.default = UiTrapFocus;
