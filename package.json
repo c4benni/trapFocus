@@ -1,6 +1,6 @@
 {
     "name": "ui-trap-focus",
-    "version": "0.0.28",
+    "version": "0.0.29",
     "description": "Trap focus for web based projects.",
     "main": "index.js",
     "files": [
