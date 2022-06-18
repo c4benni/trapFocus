@@ -1,19 +1,19 @@
 {
     "name": "ui-trap-focus",
-    "version": "0.0.30",
+    "version": "0.0.32",
     "description": "Trap focus for web based projects.",
-    "main": "index",
+    "main": "./dist/index",
     "files": [
         "dist"
     ],
     "types": "./dist",
-    "module": "./dist/index.js",
-    "unpkg": "./dist/index.js",
-    "jsdelivr": "./dist/index.js",
+    "module": "./dist/index",
+    "unpkg": "./dist/index",
+    "jsdelivr": "./dist/index",
     "exports": {
         ".": {
-            "import": "./dist/index.js",
-            "require": "./dist/index.js"
+            "import": "./dist/index",
+            "require": "./dist/index"
         }
     },
     "scripts": {
